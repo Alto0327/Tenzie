@@ -2,10 +2,10 @@
 
 * {
   box-sizing: border-box;
-  font-family: 'Karla', sans-serif !important;
 }
 
 body {
+  font-family: 'Karla', sans-serif ;
   margin: 0;
   background-color: #0B2434;
   padding: 20px;

@@ -1,32 +1,37 @@
 import Dice from "./Components/Dice"
 import './App.css'
 import { useState } from "react"
+import { nanoid } from "nanoid"
 
 function App() {
   const [dice, setDice] = useState(generateAllNewDice)
 
   function generateAllNewDice(){
-    const newDice =[]    
+    const newDice =[]   
 
     for(let i =0; i < 10; i++){
       const randomNum = Math.floor(Math.random() * 6) + 1 
-      newDice.push(randomNum)
+      newDice.push({
+        value: randomNum,
+        isHeld: false,
+        id:nanoid()
+      })
     }
     return newDice
   }
 
-  const handleClick = () => {
+  const rollDice = () => {
     setDice(generateAllNewDice)
   }
 
-  const diceElement = dice.map((num,i) => <Dice value={num} key={i}/>)
+  const diceElement = dice.map(dieobj => <Dice value={dieobj.value} key={dieobj.id}/>)
 
   return (
     <main>
       <div className="dice-container">
         {diceElement}
       </div>
-      <button className="roll-btn" onClick={handleClick}>Roll</button>
+      <button className="roll-btn" onClick={rollDice}>Roll</button>
     </main>
   )
 }
