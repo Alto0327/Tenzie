@@ -1,11 +1,16 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+main {
+  background-color: #F5F5F5;
+  height: 300px;
+  width: 600px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .dice-container{
+  padding: 2rem;
   gap: 20px;
   display: grid;
   grid-template: auto auto / repeat(5, 1fr);
@@ -22,5 +27,17 @@
   font-size: 1.75rem;
   font-weight: bold;
   cursor: pointer;
+}
 
+.roll-btn{
+  width: 120px;
+  height: 50px;
+  background-color: #5035fc;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.15);
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+  cursor: pointer;
 }

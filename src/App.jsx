@@ -15,14 +15,18 @@ function App() {
     return newDice
   }
 
+  const handleClick = () => {
+    setDice(generateAllNewDice)
+  }
+
   const diceElement = dice.map((num,i) => <Dice value={num} key={i}/>)
-  console.log(diceElement)
-  
+
   return (
     <main>
       <div className="dice-container">
         {diceElement}
       </div>
+      <button className="roll-btn" onClick={handleClick}>Roll</button>
     </main>
   )
 }
