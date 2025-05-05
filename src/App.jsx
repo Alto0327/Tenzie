@@ -7,16 +7,12 @@ import ReactConfetti from "react-confetti"
 import { useWindowSize } from "@uidotdev/usehooks"
 
 function App() {
-  const [dice, setDice] = useState(generateAllNewDice)
+  const [dice, setDice] = useState(() => generateAllNewDice())
+  
   const {width, height} = useWindowSize()
   //Check if Game is won
-  let gameWon = false
-
-  if(dice.every(die=> die.isHeld) &&  dice.every(die=>die.value === dice[0].value)){
-    console.log('Game Won')
-    gameWon = true
-    
-  }
+  const gameWon = dice.every(die => die.isHeld) &&
+    dice.every(die => die.value === dice[0].value)
 
   function generateAllNewDice(){
     const newDice =[]   
@@ -42,13 +38,18 @@ function App() {
 
 
   const rollDice = () => {
-    setDice(oldDice => oldDice.map(die =>
-      die.isHeld ?
+    if(!gameWon){
+
+      setDice(oldDice => oldDice.map(die =>
+        die.isHeld ?
         die: 
         {...die, value: Math.floor(Math.random() * 6) + 1 }
-    ))
+      ))
+    }else{
+      setDice(generateAllNewDice)
+    }
   }
-
+  
   const diceElement = dice.map(dieobj => 
     <Dice 
       value={dieobj.value}  
@@ -59,15 +60,13 @@ function App() {
 
   return (
     <main>
+      {gameWon && <ReactConfetti width={width} height={height}/> }
       <h1 className="title">Tenzies</h1>
       <p className="instructions">Roll until all dice are the same. Click each die to freeze it at its current value between rolls.</p>
       <div className="dice-container">
         {diceElement}
-      </div>
-        <button className="roll-btn" onClick={rollDice}>
-          {gameWon? 'New Game':'Roll'}
-        </button>
-        {gameWon? <ReactConfetti width={width} height={height}/>: null}
+      </div> 
+      <button className="roll-btn" onClick={rollDice}>{gameWon ? "New Game" : "Roll"}</button>
     </main>
   )
 }
