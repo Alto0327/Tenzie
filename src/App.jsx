@@ -1,17 +1,21 @@
 import Dice from "./Components/Dice"
 import './App.css'
+import React from "react"
 import { useState } from "react"
 import { nanoid } from "nanoid"
+import ReactConfetti from "react-confetti"
+import { useWindowSize } from "@uidotdev/usehooks"
 
 function App() {
   const [dice, setDice] = useState(generateAllNewDice)
-
+  const {width, height} = useWindowSize()
   //Check if Game is won
   let gameWon = false
 
   if(dice.every(die=> die.isHeld) &&  dice.every(die=>die.value === dice[0].value)){
     console.log('Game Won')
     gameWon = true
+    
   }
 
   function generateAllNewDice(){
@@ -63,6 +67,7 @@ function App() {
         <button className="roll-btn" onClick={rollDice}>
           {gameWon? 'New Game':'Roll'}
         </button>
+        {gameWon? <ReactConfetti width={width} height={height}/>: null}
     </main>
   )
 }
