@@ -44,12 +44,13 @@ button{
 }
 
 .roll-btn{
-  width: 120px;
   height: 50px;
-  background-color: #5035fc;
+  white-space: nowrap;
+  width: auto;
+  padding: 6px 21px;
   border: none;
-  border-radius: 10px;
+  border-radius: 6px;
+  background-color: #5035FF;
   color: white;
-  font-size: 1.5rem;
-  font-weight: bold;
+  font-size: 1.2rem;
 }

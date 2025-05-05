@@ -6,6 +6,14 @@ import { nanoid } from "nanoid"
 function App() {
   const [dice, setDice] = useState(generateAllNewDice)
 
+  //Check if Game is won
+  let gameWon = false
+
+  if(dice.every(die=> die.isHeld) &&  dice.every(die=>die.value === dice[0].value)){
+    console.log('Game Won')
+    gameWon = true
+  }
+
   function generateAllNewDice(){
     const newDice =[]   
 
@@ -52,7 +60,9 @@ function App() {
       <div className="dice-container">
         {diceElement}
       </div>
-      <button className="roll-btn" onClick={rollDice}>Roll</button>
+        <button className="roll-btn" onClick={rollDice}>
+          {gameWon? 'New Game':'Roll'}
+        </button>
     </main>
   )
 }
